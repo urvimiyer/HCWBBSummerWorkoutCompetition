@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import type { Group, MonthlyResult } from '@/types/database'
 
-interface Profile { id: string; name: string; group_id: string | null }
+interface Profile { id: string; name: string; group_id: string | null; group_id_2: string | null }
 interface EntryRow { user_id: string; group_id: string; points: number; date: string }
 
 interface Props {
@@ -19,10 +19,20 @@ interface Props {
 export default function StandingsTabs({ groups, profiles, entries, monthlyResults, currentGroupId, currentUserId }: Props) {
   const [tab, setTab] = useState<'groups' | 'individual' | 'history'>('groups')
 
+  // Build user → all group IDs map (supports shared/dual-group players)
+  const userGroupIds: Record<string, string[]> = {}
+  for (const p of profiles) {
+    userGroupIds[p.id] = [p.group_id, p.group_id_2].filter(Boolean) as string[]
+  }
+
   // Group totals
   const groupTotals: Record<string, number> = {}
   for (const g of groups) groupTotals[g.id] = 0
-  for (const e of entries) if (groupTotals[e.group_id] !== undefined) groupTotals[e.group_id] += e.points
+  for (const e of entries) {
+    for (const gId of (userGroupIds[e.user_id] ?? [])) {
+      if (groupTotals[gId] !== undefined) groupTotals[gId] += e.points
+    }
+  }
   const rankedGroups = [...groups].sort((a, b) => (groupTotals[b.id] ?? 0) - (groupTotals[a.id] ?? 0))
   const maxGroup = rankedGroups[0] ? groupTotals[rankedGroups[0].id] : 1
 
@@ -58,7 +68,7 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
             const pts = groupTotals[g.id] ?? 0
             const isMe = g.id === currentGroupId
             const pct = maxGroup > 0 ? Math.round((pts / maxGroup) * 100) : 0
-            const members = profiles.filter(p => p.group_id === g.id)
+            const members = profiles.filter(p => p.group_id === g.id || p.group_id_2 === g.id)
             return (
               <Link key={g.id} href={`/groups/${g.id}`}>
                 <div className={`bg-white rounded-xl border p-4 ${isMe ? 'border-[#003087]' : 'border-gray-100'}`}>
@@ -94,6 +104,8 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
             const isMe = u.id === currentUserId
             const pct = maxUser > 0 ? Math.round((pts / maxUser) * 100) : 0
             const group = groups.find(g => g.id === u.group_id)
+            const group2 = u.group_id_2 ? groups.find(g => g.id === u.group_id_2) : null
+            const groupLabel = group2 ? `${group?.name} & ${group2.name}` : group?.name
             return (
               <div key={u.id} className={`bg-white rounded-xl border p-3 flex items-center gap-3 ${isMe ? 'border-[#003087]' : 'border-gray-100'}`}>
                 <span className={`text-xs font-bold w-5 text-center ${i === 0 ? 'text-[#C99700]' : 'text-gray-400'}`}>
@@ -107,7 +119,7 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
                     <span className="text-sm font-bold text-gray-900 ml-2">{pts}</span>
                   </div>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs text-gray-400">{group?.name}</span>
+                    <span className="text-xs text-gray-400">{groupLabel}</span>
                     <div className="flex-1 h-1 bg-gray-100 rounded-full overflow-hidden">
                       <div className={`h-full rounded-full ${isMe ? 'bg-[#003087]' : 'bg-gray-200'}`} style={{ width: `${pct}%` }} />
                     </div>

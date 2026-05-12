@@ -16,9 +16,9 @@ export type Database = {
         Relationships: []
       }
       profiles: {
-        Row: { id: string; name: string; email: string; role: 'player' | 'coach' | 'admin'; group_id: string | null; invited_by: string | null; created_at: string }
-        Insert: { id: string; name: string; email: string; role?: 'player' | 'coach' | 'admin'; group_id?: string | null; invited_by?: string | null; created_at?: string }
-        Update: { id?: string; name?: string; email?: string; role?: 'player' | 'coach' | 'admin'; group_id?: string | null; invited_by?: string | null; created_at?: string }
+        Row: { id: string; name: string; email: string; role: 'player' | 'coach' | 'admin'; group_id: string | null; group_id_2: string | null; invited_by: string | null; created_at: string }
+        Insert: { id: string; name: string; email: string; role?: 'player' | 'coach' | 'admin'; group_id?: string | null; group_id_2?: string | null; invited_by?: string | null; created_at?: string }
+        Update: { id?: string; name?: string; email?: string; role?: 'player' | 'coach' | 'admin'; group_id?: string | null; group_id_2?: string | null; invited_by?: string | null; created_at?: string }
         Relationships: []
       }
       workout_types: {

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Group, Season } from '@/types/database'
 
 interface EntryRow { user_id: string; points: number; date: string; workout_types: { name: string } | null }
-interface MemberRow { id: string; name: string; role: string }
+interface MemberRow { id: string; name: string; role: string; group_id: string | null; group_id_2: string | null }
 
 export default async function GroupPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -18,20 +18,23 @@ export default async function GroupPage({ params }: { params: Promise<{ id: stri
 
   const { data: membersRaw } = await supabase
     .from('profiles')
-    .select('id, name, role')
-    .eq('group_id', id)
+    .select('id, name, role, group_id, group_id_2')
+    .or(`group_id.eq.${id},group_id_2.eq.${id}`)
   const members = (membersRaw ?? []) as MemberRow[]
 
   const now = new Date()
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0]
 
-  const { data: entriesRaw } = await supabase
-    .from('entries')
-    .select('user_id, points, date, workout_types(name)')
-    .eq('group_id', id)
-    .eq('season_id', season?.id ?? '')
-    .gte('date', monthStart)
-    .order('date', { ascending: false })
+  const memberIds = members.map(m => m.id)
+  const { data: entriesRaw } = memberIds.length > 0
+    ? await supabase
+        .from('entries')
+        .select('user_id, points, date, workout_types(name)')
+        .in('user_id', memberIds)
+        .eq('season_id', season?.id ?? '')
+        .gte('date', monthStart)
+        .order('date', { ascending: false })
+    : { data: [] }
   const entries = (entriesRaw ?? []) as EntryRow[]
 
   const memberTotals: Record<string, number> = {}
@@ -60,7 +63,10 @@ export default async function GroupPage({ params }: { params: Promise<{ id: stri
         <div className="space-y-2">
           {members.map(m => (
             <div key={m.id} className="flex justify-between items-center text-sm">
-              <span className="text-gray-800 font-medium">{m.name}</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-gray-800 font-medium">{m.name}</span>
+                {m.group_id_2 === id && <span className="text-xs text-gray-400">(shared)</span>}
+              </div>
               <span className="font-bold text-[#003087]">{memberTotals[m.id] ?? 0} pts</span>
             </div>
           ))}

@@ -15,16 +15,24 @@ export default async function GroupStandingsPreview({ seasonId, currentGroupId }
 
   if (!groups?.length) return null
 
-  const { data: entries } = await supabase
-    .from('entries')
-    .select('group_id, points')
-    .eq('season_id', seasonId)
-    .gte('date', new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0])
+  const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0]
+
+  const [{ data: profiles }, { data: entries }] = await Promise.all([
+    supabase.from('profiles').select('id, group_id, group_id_2'),
+    supabase.from('entries').select('user_id, points').eq('season_id', seasonId).gte('date', monthStart),
+  ])
+
+  const userGroupIds: Record<string, string[]> = {}
+  for (const p of profiles ?? []) {
+    userGroupIds[p.id] = [p.group_id, p.group_id_2].filter(Boolean) as string[]
+  }
 
   const totals: Record<string, number> = {}
   for (const g of groups) totals[g.id] = 0
   for (const e of entries ?? []) {
-    if (totals[e.group_id] !== undefined) totals[e.group_id] += e.points
+    for (const gId of (userGroupIds[e.user_id] ?? [])) {
+      if (totals[gId] !== undefined) totals[gId] += e.points
+    }
   }
 
   const ranked = [...groups].sort((a, b) => (totals[b.id] ?? 0) - (totals[a.id] ?? 0))

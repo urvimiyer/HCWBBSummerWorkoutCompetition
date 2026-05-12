@@ -25,7 +25,7 @@ export default async function StandingsPage() {
 
   const [{ data: groups }, { data: profiles }, { data: entries }, { data: monthlyResults }] = await Promise.all([
     supabase.from('groups').select('*').eq('season_id', season.id),
-    supabase.from('profiles').select('id, name, group_id'),
+    supabase.from('profiles').select('id, name, group_id, group_id_2'),
     supabase.from('entries').select('user_id, group_id, points, date').eq('season_id', season.id).gte('date', monthStart),
     supabase.from('monthly_results').select('*').eq('season_id', season.id).order('month'),
   ])

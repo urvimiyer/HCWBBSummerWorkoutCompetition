@@ -25,6 +25,7 @@ create table if not exists profiles (
   email text not null,
   role text not null default 'player' check (role in ('player', 'coach', 'admin')),
   group_id uuid references groups(id) on delete set null,
+  group_id_2 uuid references groups(id) on delete set null,
   invited_by uuid references profiles(id),
   created_at timestamptz default now()
 );

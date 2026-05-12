@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { Plus, Copy, Check, Lock } from 'lucide-react'
 import type { Season, Group, WorkoutType, Invite } from '@/types/database'
 
-interface Profile { id: string; name: string; email: string; role: string; group_id: string | null }
+interface Profile { id: string; name: string; email: string; role: string; group_id: string | null; group_id_2: string | null }
 
 interface Props {
   seasons: Season[]
@@ -71,14 +71,23 @@ function SeasonTab({ seasons, activeSeason, groups, profiles }: { seasons: Seaso
 
     const { data: entries } = await supabase
       .from('entries')
-      .select('group_id, points')
+      .select('user_id, points')
       .eq('season_id', activeSeason.id)
       .gte('date', monthStart)
       .lte('date', monthEnd)
 
+    const userGroupIds: Record<string, string[]> = {}
+    for (const p of profiles) {
+      userGroupIds[p.id] = [p.group_id, p.group_id_2].filter(Boolean) as string[]
+    }
+
     const groupTotals: Record<string, number> = {}
     for (const g of groups) groupTotals[g.id] = 0
-    for (const e of entries ?? []) groupTotals[e.group_id] = (groupTotals[e.group_id] ?? 0) + e.points
+    for (const e of entries ?? []) {
+      for (const gId of (userGroupIds[e.user_id] ?? [])) {
+        if (groupTotals[gId] !== undefined) groupTotals[gId] += e.points
+      }
+    }
 
     const winnerId = Object.entries(groupTotals).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null
 
@@ -189,9 +198,16 @@ function GroupsTab({ groups, profiles, activeSeason }: { groups: Group[]; profil
     router.refresh()
   }
 
-  async function assignToGroup(userId: string, groupId: string | null) {
+  async function assignPrimaryGroup(userId: string, groupId: string | null) {
     const supabase = createClient()
     await supabase.from('profiles').update({ group_id: groupId }).eq('id', userId)
+    setAssigningGroup(null)
+    router.refresh()
+  }
+
+  async function assignSecondaryGroup(userId: string, groupId: string | null) {
+    const supabase = createClient()
+    await supabase.from('profiles').update({ group_id_2: groupId }).eq('id', userId)
     setAssigningGroup(null)
     router.refresh()
   }
@@ -202,24 +218,50 @@ function GroupsTab({ groups, profiles, activeSeason }: { groups: Group[]; profil
     <div className="space-y-4">
       {/* Groups */}
       {groups.filter(g => !activeSeason || g.season_id === activeSeason.id).map(g => {
-        const members = profiles.filter(p => p.group_id === g.id)
+        const primaryMembers = profiles.filter(p => p.group_id === g.id)
+        const sharedMembers = profiles.filter(p => p.group_id_2 === g.id)
+        const allMembers = primaryMembers.length + sharedMembers.length
+        const eligibleToShare = profiles.filter(p => p.group_id !== g.id && p.group_id_2 !== g.id && p.group_id !== null)
         return (
           <div key={g.id} className="bg-white rounded-2xl border border-gray-100 p-4">
             <h3 className="font-bold text-gray-900 mb-2">{g.name}</h3>
             <div className="space-y-1.5">
-              {members.map(m => (
+              {primaryMembers.map(m => (
                 <div key={m.id} className="flex items-center justify-between text-sm">
                   <span className="text-gray-700">{m.name}</span>
                   <button
-                    onClick={() => assignToGroup(m.id, null)}
+                    onClick={() => assignPrimaryGroup(m.id, null)}
                     className="text-xs text-red-400 hover:text-red-600"
                   >
                     Remove
                   </button>
                 </div>
               ))}
-              {members.length === 0 && <p className="text-xs text-gray-400">No members yet</p>}
+              {sharedMembers.map(m => (
+                <div key={`shared-${m.id}`} className="flex items-center justify-between text-sm">
+                  <span className="text-gray-700">{m.name} <span className="text-xs text-gray-400">(shared)</span></span>
+                  <button
+                    onClick={() => assignSecondaryGroup(m.id, null)}
+                    className="text-xs text-red-400 hover:text-red-600"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              {allMembers === 0 && <p className="text-xs text-gray-400">No members yet</p>}
             </div>
+            {eligibleToShare.length > 0 && (
+              <div className="mt-3 pt-3 border-t border-gray-100">
+                <select
+                  className="text-xs border border-gray-200 rounded-lg px-2 py-1.5 w-full focus:outline-none focus:ring-1 focus:ring-[#003087]"
+                  defaultValue=""
+                  onChange={e => { if (e.target.value) assignSecondaryGroup(e.target.value, g.id) }}
+                >
+                  <option value="">Add shared player…</option>
+                  {eligibleToShare.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                </select>
+              </div>
+            )}
           </div>
         )
       })}
@@ -260,7 +302,7 @@ function GroupsTab({ groups, profiles, activeSeason }: { groups: Group[]; profil
                 <select
                   className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#003087]"
                   defaultValue=""
-                  onChange={e => { if (e.target.value) assignToGroup(u.id, e.target.value) }}
+                  onChange={e => { if (e.target.value) assignPrimaryGroup(u.id, e.target.value) }}
                 >
                   <option value="">Assign group…</option>
                   {groups.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
