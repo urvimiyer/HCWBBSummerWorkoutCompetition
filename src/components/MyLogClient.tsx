@@ -87,7 +87,7 @@ export default function MyLogClient({ entries, workoutTypes, currentUserId, seas
           <div key={month}>
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-bold text-gray-700">{label}</h3>
-              <span className="text-sm font-bold text-[#003087]">{monthTotal} pts</span>
+              <span className="text-sm font-bold text-[#C8102E]">{monthTotal} pts</span>
             </div>
             <div className="space-y-2">
               {monthEntries.map(entry => (
@@ -110,7 +110,7 @@ export default function MyLogClient({ entries, workoutTypes, currentUserId, seas
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-3 text-center">
-      <p className="text-xl font-bold text-[#003087]">{value}</p>
+      <p className="text-xl font-bold text-[#C8102E]">{value}</p>
       <p className="text-xs text-gray-500 mt-0.5">{label}</p>
     </div>
   )
@@ -161,7 +161,7 @@ function EntryRow({ entry, workoutTypes, currentUserId, onMutate }: {
           <select
             value={workoutTypeId}
             onChange={e => setWorkoutTypeId(e.target.value)}
-            className="w-full border border-gray-200 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#003087]"
+            className="w-full border border-gray-200 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
           >
             {workoutTypes.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
           </select>
@@ -170,10 +170,10 @@ function EntryRow({ entry, workoutTypes, currentUserId, onMutate }: {
             onChange={e => setNote(e.target.value)}
             maxLength={100}
             placeholder="Note (optional)"
-            className="w-full border border-gray-200 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#003087]"
+            className="w-full border border-gray-200 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
           />
           <div className="flex gap-2">
-            <button onClick={saveEdit} disabled={saving} className="flex-1 bg-[#003087] text-white rounded-lg py-1.5 text-xs font-semibold flex items-center justify-center gap-1">
+            <button onClick={saveEdit} disabled={saving} className="flex-1 bg-[#C8102E] text-white rounded-lg py-1.5 text-xs font-semibold flex items-center justify-center gap-1">
               <Check className="w-3 h-3" /> Save
             </button>
             <button onClick={() => setEditing(false)} className="flex-1 border border-gray-200 rounded-lg py-1.5 text-xs text-gray-600 flex items-center justify-center gap-1">
@@ -186,7 +186,7 @@ function EntryRow({ entry, workoutTypes, currentUserId, onMutate }: {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="text-sm font-semibold text-gray-900 truncate">{entry.workout_types?.name ?? 'Workout'}</span>
-              <span className="text-xs text-[#003087] font-bold shrink-0">+{entry.points}</span>
+              <span className="text-xs text-[#C8102E] font-bold shrink-0">+{entry.points}</span>
               {entry.photo_url && <span className="text-xs">📸</span>}
               {entry.edited_at && <span className="text-xs text-gray-400">edited</span>}
             </div>

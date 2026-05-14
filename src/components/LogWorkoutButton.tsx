@@ -24,14 +24,14 @@ export default function LogWorkoutButton({ seasonId, groupId, lastEntry }: Props
       <div className="flex gap-2">
         <button
           onClick={() => { setRepeatMode(false); setOpen(true) }}
-          className="flex-1 bg-white text-[#003087] font-bold rounded-xl py-3 text-sm hover:bg-blue-50 transition-colors"
+          className="flex-1 bg-white text-[#C8102E] font-bold rounded-xl py-3 text-sm hover:bg-blue-50 transition-colors"
         >
           + Log Workout
         </button>
         {lastEntry && (
           <button
             onClick={() => { setRepeatMode(true); setOpen(true) }}
-            className="flex-1 bg-[#C99700] text-white font-semibold rounded-xl py-3 text-xs hover:bg-yellow-600 transition-colors"
+            className="flex-1 bg-[#111111] text-white font-semibold rounded-xl py-3 text-xs hover:bg-yellow-600 transition-colors"
           >
             Repeat: {lastEntry.workout_types?.name?.split(' ')[0]}
           </button>

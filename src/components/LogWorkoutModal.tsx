@@ -107,7 +107,7 @@ export default function LogWorkoutModal({ seasonId, groupId, defaultWorkoutTypeI
         {success ? (
           <div className="text-center py-8">
             <div className="text-5xl mb-3">💪</div>
-            <p className="text-lg font-bold text-[#003087]">Logged! +5 points</p>
+            <p className="text-lg font-bold text-[#C8102E]">Logged! +5 points</p>
             <p className="text-sm text-gray-500">Keep it up!</p>
           </div>
         ) : (
@@ -120,7 +120,7 @@ export default function LogWorkoutModal({ seasonId, groupId, defaultWorkoutTypeI
                 value={workoutTypeId}
                 onChange={e => setWorkoutTypeId(e.target.value)}
                 required
-                className="w-full border border-gray-200 rounded-xl px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087] bg-white"
+                className="w-full border border-gray-200 rounded-xl px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E] bg-white"
               >
                 {workoutTypes.map(t => (
                   <option key={t.id} value={t.id}>{t.name} — {t.point_value} pts</option>
@@ -136,7 +136,7 @@ export default function LogWorkoutModal({ seasonId, groupId, defaultWorkoutTypeI
                 min={minDate}
                 max={today}
                 onChange={e => setDate(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+                className="w-full border border-gray-200 rounded-xl px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
               />
             </div>
 
@@ -149,7 +149,7 @@ export default function LogWorkoutModal({ seasonId, groupId, defaultWorkoutTypeI
                 value={note}
                 maxLength={100}
                 onChange={e => setNote(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+                className="w-full border border-gray-200 rounded-xl px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
                 placeholder="e.g. 2 mile run on the ERC trail"
               />
               <p className="text-xs text-gray-400 mt-1 text-right">{note.length}/100</p>
@@ -175,7 +175,7 @@ export default function LogWorkoutModal({ seasonId, groupId, defaultWorkoutTypeI
                 <button
                   type="button"
                   onClick={() => fileRef.current?.click()}
-                  className="w-full border-2 border-dashed border-gray-200 rounded-xl py-4 flex flex-col items-center gap-1 text-gray-400 hover:border-[#003087] hover:text-[#003087] transition-colors"
+                  className="w-full border-2 border-dashed border-gray-200 rounded-xl py-4 flex flex-col items-center gap-1 text-gray-400 hover:border-[#C8102E] hover:text-[#C8102E] transition-colors"
                 >
                   <Camera className="w-5 h-5" />
                   <span className="text-xs">Tap to upload photo</span>
@@ -187,7 +187,7 @@ export default function LogWorkoutModal({ seasonId, groupId, defaultWorkoutTypeI
             <button
               type="submit"
               disabled={loading || !workoutTypeId}
-              className="w-full bg-[#003087] text-white rounded-xl py-3.5 font-bold text-sm disabled:opacity-60 hover:bg-[#1a4fa0] transition-colors"
+              className="w-full bg-[#C8102E] text-white rounded-xl py-3.5 font-bold text-sm disabled:opacity-60 hover:bg-[#a50d25] transition-colors"
             >
               {loading ? 'Logging…' : 'Log Workout (+5 pts)'}
             </button>

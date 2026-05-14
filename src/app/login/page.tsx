@@ -47,17 +47,17 @@ export default function LoginPage() {
       <div className="relative z-10 w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-white border border-[#dce8ff] shadow-lg shadow-[#003087]/10 flex items-center justify-center mx-auto mb-4">
-            <Dumbbell className="w-8 h-8 text-[#003087]" />
+          <div className="w-16 h-16 rounded-2xl bg-white border border-[#ffe4e6] shadow-lg shadow-[#C8102E]/10 flex items-center justify-center mx-auto mb-4">
+            <Dumbbell className="w-8 h-8 text-[#C8102E]" />
           </div>
-          <h1 className="font-condensed text-4xl font-bold text-[#003087] tracking-widest uppercase">HCWBB</h1>
-          <p className="text-[#4a6080] text-xs mt-1 tracking-[0.2em] uppercase">Summer Workout Competition</p>
+          <h1 className="font-condensed text-4xl font-bold text-[#C8102E] tracking-widest uppercase">HCWBB</h1>
+          <p className="text-[#555555] text-xs mt-1 tracking-[0.2em] uppercase">Summer Workout Competition</p>
         </div>
 
         {/* Card */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white/80 backdrop-blur-2xl border border-white/90 rounded-2xl p-6 space-y-4 shadow-xl shadow-[#003087]/8"
+          className="bg-white/80 backdrop-blur-2xl border border-white/90 rounded-2xl p-6 space-y-4 shadow-xl shadow-[#C8102E]/8"
         >
           {error && (
             <div className="bg-red-50 text-red-600 text-sm rounded-xl px-3 py-2 border border-red-100">
@@ -66,7 +66,7 @@ export default function LoginPage() {
           )}
 
           <div>
-            <label className="block text-[10px] font-semibold text-[#4a6080] mb-1.5 tracking-widest uppercase">
+            <label className="block text-[10px] font-semibold text-[#555555] mb-1.5 tracking-widest uppercase">
               Email
             </label>
             <input
@@ -74,13 +74,13 @@ export default function LoginPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="w-full bg-[#f4f7ff] border border-[#dce8ff] rounded-xl px-4 py-2.5 text-sm text-[#0f1f3d] placeholder-[#8aa0bb] focus:outline-none focus:border-[#003087]/40 focus:ring-2 focus:ring-[#003087]/10 transition-all duration-200"
+              className="w-full bg-[#f5f5f5] border border-[#ffe4e6] rounded-xl px-4 py-2.5 text-sm text-[#111111] placeholder-[#888888] focus:outline-none focus:border-[#C8102E]/40 focus:ring-2 focus:ring-[#C8102E]/10 transition-all duration-200"
               placeholder="you@haverford.edu"
             />
           </div>
 
           <div>
-            <label className="block text-[10px] font-semibold text-[#4a6080] mb-1.5 tracking-widest uppercase">
+            <label className="block text-[10px] font-semibold text-[#555555] mb-1.5 tracking-widest uppercase">
               Password
             </label>
             <input
@@ -88,7 +88,7 @@ export default function LoginPage() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              className="w-full bg-[#f4f7ff] border border-[#dce8ff] rounded-xl px-4 py-2.5 text-sm text-[#0f1f3d] placeholder-[#8aa0bb] focus:outline-none focus:border-[#003087]/40 focus:ring-2 focus:ring-[#003087]/10 transition-all duration-200"
+              className="w-full bg-[#f5f5f5] border border-[#ffe4e6] rounded-xl px-4 py-2.5 text-sm text-[#111111] placeholder-[#888888] focus:outline-none focus:border-[#C8102E]/40 focus:ring-2 focus:ring-[#C8102E]/10 transition-all duration-200"
               placeholder="••••••••"
             />
           </div>
@@ -96,24 +96,24 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#003087] hover:bg-[#1a4fa0] active:scale-[0.98] text-white rounded-xl py-3 text-sm font-semibold tracking-wide disabled:opacity-50 transition-all duration-200 shadow-md shadow-[#003087]/25 cursor-pointer"
+            className="w-full bg-[#C8102E] hover:bg-[#a50d25] active:scale-[0.98] text-white rounded-xl py-3 text-sm font-semibold tracking-wide disabled:opacity-50 transition-all duration-200 shadow-md shadow-[#C8102E]/25 cursor-pointer"
           >
             {loading ? 'Signing in…' : 'Sign In'}
           </button>
 
           <div className="relative py-1">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[#e2eaf5]" />
+              <div className="w-full border-t border-[#e8e8e8]" />
             </div>
             <div className="relative flex justify-center">
-              <span className="text-xs text-[#8aa0bb] bg-white/80 px-3">or</span>
+              <span className="text-xs text-[#888888] bg-white/80 px-3">or</span>
             </div>
           </div>
 
           <button
             type="button"
             onClick={handleGoogle}
-            className="w-full bg-[#f4f7ff] hover:bg-[#eef3ff] active:scale-[0.98] border border-[#dce8ff] rounded-xl py-3 text-sm font-medium text-[#0f1f3d] transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer"
+            className="w-full bg-[#f5f5f5] hover:bg-[#fff0f1] active:scale-[0.98] border border-[#ffe4e6] rounded-xl py-3 text-sm font-medium text-[#111111] transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer"
           >
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -125,9 +125,9 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="text-center text-xs text-[#8aa0bb] mt-5">
+        <p className="text-center text-xs text-[#888888] mt-5">
           Have an invite link?{' '}
-          <Link href="/invite" className="text-[#003087] font-semibold hover:text-[#1a4fa0] transition-colors">
+          <Link href="/invite" className="text-[#C8102E] font-semibold hover:text-[#a50d25] transition-colors">
             Sign up here
           </Link>
         </p>

@@ -20,7 +20,7 @@ export default function BottomNav({ isAdmin }: { isAdmin: boolean }) {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 max-w-lg mx-auto">
-      <div className="bg-white/90 backdrop-blur-xl border-t border-[#e2eaf5]">
+      <div className="bg-white/90 backdrop-blur-xl border-t border-[#e8e8e8]">
         <div className="flex">
           {items.map(({ href, label, icon: Icon }) => {
             const active = href === '/' ? pathname === '/' : pathname.startsWith(href)
@@ -29,7 +29,7 @@ export default function BottomNav({ isAdmin }: { isAdmin: boolean }) {
                 key={href}
                 href={href}
                 className={`flex-1 flex flex-col items-center gap-1 py-3 text-[10px] font-semibold tracking-wider uppercase transition-colors cursor-pointer ${
-                  active ? 'text-[#003087]' : 'text-[#8aa0bb] hover:text-[#4a6080]'
+                  active ? 'text-[#C8102E]' : 'text-[#888888] hover:text-[#555555]'
                 }`}
               >
                 <Icon
@@ -37,7 +37,7 @@ export default function BottomNav({ isAdmin }: { isAdmin: boolean }) {
                 />
                 <span>{label}</span>
                 {active && (
-                  <span className="absolute bottom-0 w-8 h-0.5 bg-[#003087] rounded-full" />
+                  <span className="absolute bottom-0 w-8 h-0.5 bg-[#C8102E] rounded-full" />
                 )}
               </Link>
             )

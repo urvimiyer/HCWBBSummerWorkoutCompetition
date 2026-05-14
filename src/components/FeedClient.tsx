@@ -86,7 +86,7 @@ function FeedCard({ entry, currentUserId, onMutate }: { entry: Entry; currentUse
           <p className="text-xs text-gray-400">{timeAgo}</p>
         </div>
         <div className="text-right">
-          <p className="text-sm font-bold text-[#003087]">+{entry.points} pts</p>
+          <p className="text-sm font-bold text-[#C8102E]">+{entry.points} pts</p>
           <p className="text-xs text-gray-500">{entry.workout_types?.name}</p>
         </div>
       </div>
@@ -111,7 +111,7 @@ function FeedCard({ entry, currentUserId, onMutate }: { entry: Entry; currentUse
               key={emoji}
               onClick={() => toggleReaction(emoji)}
               className={`flex items-center gap-1 text-sm px-2.5 py-1 rounded-full border transition-colors ${
-                data?.mine ? 'bg-[#003087]/10 border-[#003087]/30 text-[#003087]' : 'border-gray-100 text-gray-500 hover:border-gray-200'
+                data?.mine ? 'bg-[#C8102E]/10 border-[#C8102E]/30 text-[#C8102E]' : 'border-gray-100 text-gray-500 hover:border-gray-200'
               }`}
             >
               {emoji} {data?.count ? <span className="text-xs">{data.count}</span> : null}
@@ -143,12 +143,12 @@ function FeedCard({ entry, currentUserId, onMutate }: { entry: Entry; currentUse
               onChange={e => setCommentText(e.target.value)}
               placeholder="Add a comment…"
               maxLength={300}
-              className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#003087]"
+              className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             />
             <button
               type="submit"
               disabled={submitting || !commentText.trim()}
-              className="text-sm font-semibold text-[#003087] disabled:opacity-40"
+              className="text-sm font-semibold text-[#C8102E] disabled:opacity-40"
             >
               Post
             </button>

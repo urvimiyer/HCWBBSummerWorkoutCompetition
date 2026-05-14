@@ -54,7 +54,7 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
             key={t}
             onClick={() => setTab(t)}
             className={`flex-1 text-xs font-semibold py-2 rounded-lg transition-colors capitalize ${
-              tab === t ? 'bg-white text-[#003087] shadow-sm' : 'text-gray-500'
+              tab === t ? 'bg-white text-[#C8102E] shadow-sm' : 'text-gray-500'
             }`}
           >
             {t}
@@ -72,15 +72,15 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
             const members = profiles.filter(p => p.group_id === g.id || p.group_id_2 === g.id)
             return (
               <Link key={g.id} href={`/groups/${g.id}`}>
-                <div className={`bg-white rounded-xl border p-4 ${isMe ? 'border-[#003087]' : 'border-gray-100'}`}>
+                <div className={`bg-white rounded-xl border p-4 ${isMe ? 'border-[#C8102E]' : 'border-gray-100'}`}>
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span className={`text-sm font-bold w-6 text-center ${i === 0 ? 'text-[#C99700]' : 'text-gray-400'}`}>
+                      <span className={`text-sm font-bold w-6 text-center ${i === 0 ? 'text-[#111111]' : 'text-gray-400'}`}>
                         {i === 0 ? '🥇' : `#${i + 1}`}
                       </span>
                       <div>
-                        <p className={`text-sm font-bold ${isMe ? 'text-[#003087]' : 'text-gray-900'}`}>
-                          {g.name} {isMe && <span className="text-xs text-[#C99700]">(you)</span>}
+                        <p className={`text-sm font-bold ${isMe ? 'text-[#C8102E]' : 'text-gray-900'}`}>
+                          {g.name} {isMe && <span className="text-xs text-[#111111]">(you)</span>}
                         </p>
                         <p className="text-xs text-gray-400">{members.map(m => m.name.split(' ')[0]).join(', ')}</p>
                       </div>
@@ -88,7 +88,7 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
                     <span className="text-lg font-bold text-gray-900">{pts}</span>
                   </div>
                   <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div className={`h-full rounded-full ${isMe ? 'bg-[#003087]' : 'bg-gray-300'}`} style={{ width: `${pct}%` }} />
+                    <div className={`h-full rounded-full ${isMe ? 'bg-[#C8102E]' : 'bg-gray-300'}`} style={{ width: `${pct}%` }} />
                   </div>
                 </div>
               </Link>
@@ -108,21 +108,21 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
             const group2 = u.group_id_2 ? groups.find(g => g.id === u.group_id_2) : null
             const groupLabel = group2 ? `${group?.name} & ${group2.name}` : group?.name
             return (
-              <div key={u.id} className={`bg-white rounded-xl border p-3 flex items-center gap-3 ${isMe ? 'border-[#003087]' : 'border-gray-100'}`}>
-                <span className={`text-xs font-bold w-5 text-center ${i === 0 ? 'text-[#C99700]' : 'text-gray-400'}`}>
+              <div key={u.id} className={`bg-white rounded-xl border p-3 flex items-center gap-3 ${isMe ? 'border-[#C8102E]' : 'border-gray-100'}`}>
+                <span className={`text-xs font-bold w-5 text-center ${i === 0 ? 'text-[#111111]' : 'text-gray-400'}`}>
                   {i === 0 ? '🥇' : `${i + 1}`}
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <p className={`text-sm font-semibold truncate ${isMe ? 'text-[#003087]' : 'text-gray-900'}`}>
-                      {u.name} {isMe && <span className="text-xs text-[#C99700]">(you)</span>}
+                    <p className={`text-sm font-semibold truncate ${isMe ? 'text-[#C8102E]' : 'text-gray-900'}`}>
+                      {u.name} {isMe && <span className="text-xs text-[#111111]">(you)</span>}
                     </p>
                     <span className="text-sm font-bold text-gray-900 ml-2">{pts}</span>
                   </div>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-xs text-gray-400">{groupLabel}</span>
                     <div className="flex-1 h-1 bg-gray-100 rounded-full overflow-hidden">
-                      <div className={`h-full rounded-full ${isMe ? 'bg-[#003087]' : 'bg-gray-200'}`} style={{ width: `${pct}%` }} />
+                      <div className={`h-full rounded-full ${isMe ? 'bg-[#C8102E]' : 'bg-gray-200'}`} style={{ width: `${pct}%` }} />
                     </div>
                   </div>
                 </div>
@@ -147,7 +147,7 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-bold text-gray-900">{months[r.month - 1]} {r.year}</h3>
                   {winnerGroup && (
-                    <span className="text-xs bg-[#C99700] text-white px-2 py-1 rounded-full font-semibold">
+                    <span className="text-xs bg-[#111111] text-white px-2 py-1 rounded-full font-semibold">
                       🏆 {winnerGroup.name}
                     </span>
                   )}

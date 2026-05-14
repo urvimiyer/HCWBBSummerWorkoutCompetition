@@ -2,14 +2,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f7ff;
-  --foreground: #0f1f3d;
+  --background: #f5f5f5;
+  --foreground: #111111;
   --surface: #ffffff;
-  --surface-border: #e2eaf5;
-  --hc-blue: #003087;
-  --hc-gold: #C99700;
-  --hc-gold-light: #f0c000;
-  --hc-blue-light: #1a5ccc;
+  --surface-border: #e8e8e8;
+  --hc-blue: #C8102E;
+  --hc-gold: #111111;
+  --hc-gold-light: #222222;
+  --hc-blue-light: #a50d25;
 }
 
 @theme inline {
@@ -41,6 +41,6 @@ input[type="date"],
 input[type="number"],
 select,
 textarea {
-  color: #0f1f3d;
+  color: #111111;
   background-color: #ffffff;
 }

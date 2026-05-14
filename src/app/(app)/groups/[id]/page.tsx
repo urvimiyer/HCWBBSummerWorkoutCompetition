@@ -54,7 +54,7 @@ export default async function GroupPage({ params }: { params: Promise<{ id: stri
   return (
     <div className="px-4 py-6 space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-[#003087]">{group.name}</h1>
+        <h1 className="text-xl font-bold text-[#C8102E]">{group.name}</h1>
         <p className="text-sm text-gray-500 mt-0.5">{monthName} — {groupTotal} total pts</p>
       </div>
 
@@ -67,7 +67,7 @@ export default async function GroupPage({ params }: { params: Promise<{ id: stri
                 <span className="text-gray-800 font-medium">{m.name}</span>
                 {m.group_id_2 === id && <span className="text-xs text-gray-400">(shared)</span>}
               </div>
-              <span className="font-bold text-[#003087]">{memberTotals[m.id] ?? 0} pts</span>
+              <span className="font-bold text-[#C8102E]">{memberTotals[m.id] ?? 0} pts</span>
             </div>
           ))}
         </div>
@@ -101,7 +101,7 @@ export default async function GroupPage({ params }: { params: Promise<{ id: stri
                   <span className="text-gray-400 mx-1">·</span>
                   <span className="text-gray-600">{e.workout_types?.name}</span>
                 </div>
-                <span className="text-[#003087] font-bold">+{e.points}</span>
+                <span className="text-[#C8102E] font-bold">+{e.points}</span>
               </div>
             )
           })}

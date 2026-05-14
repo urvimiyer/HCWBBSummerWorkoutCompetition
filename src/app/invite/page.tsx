@@ -85,7 +85,7 @@ function InviteForm() {
           value={name}
           onChange={e => setName(e.target.value)}
           required
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
           placeholder="Your name"
         />
       </div>
@@ -96,7 +96,7 @@ function InviteForm() {
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
         />
       </div>
       <div>
@@ -107,14 +107,14 @@ function InviteForm() {
           onChange={e => setPassword(e.target.value)}
           required
           minLength={6}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
           placeholder="Min 6 characters"
         />
       </div>
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-[#003087] text-white rounded-lg py-2.5 text-sm font-semibold disabled:opacity-60 hover:bg-[#1a4fa0] transition-colors"
+        className="w-full bg-[#C8102E] text-white rounded-lg py-2.5 text-sm font-semibold disabled:opacity-60 hover:bg-[#a50d25] transition-colors"
       >
         {loading ? 'Creating account…' : 'Create account'}
       </button>
@@ -127,10 +127,10 @@ export default function InvitePage() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-full bg-[#003087] flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 rounded-full bg-[#C8102E] flex items-center justify-center mx-auto mb-4">
             <span className="text-2xl">🏀</span>
           </div>
-          <h1 className="text-2xl font-bold text-[#003087]">Join HCWBB Summer Workout</h1>
+          <h1 className="text-2xl font-bold text-[#C8102E]">Join HCWBB Summer Workout</h1>
           <p className="text-gray-500 text-sm mt-1">Create your account</p>
         </div>
         <Suspense fallback={<div className="text-center text-gray-500 py-8">Loading…</div>}>

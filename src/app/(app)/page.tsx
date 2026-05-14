@@ -44,24 +44,24 @@ export default async function HomePage() {
     <div className="px-4 py-6 space-y-4">
       {/* Greeting */}
       <div>
-        <h2 className="font-condensed text-4xl font-bold text-[#0f1f3d] tracking-wide uppercase">
+        <h2 className="font-condensed text-4xl font-bold text-[#111111] tracking-wide uppercase">
           Hey, {firstName}
         </h2>
-        <p className="text-[#8aa0bb] text-xs mt-1 tracking-widest uppercase">
+        <p className="text-[#888888] text-xs mt-1 tracking-widest uppercase">
           {monthName} Competition — Live
         </p>
       </div>
 
       {/* Log workout card */}
-      <div className="relative bg-gradient-to-br from-[#003087] to-[#1a3d7c] rounded-2xl p-5 text-white overflow-hidden shadow-lg shadow-[#003087]/20">
+      <div className="relative bg-gradient-to-br from-[#C8102E] to-[#8B0000] rounded-2xl p-5 text-white overflow-hidden shadow-lg shadow-[#C8102E]/20">
         {/* Pastel glow accents */}
-        <div className="absolute -top-6 -right-6 w-36 h-36 bg-[#dce8ff]/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-4 left-8 w-24 h-24 bg-[#C99700]/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -top-6 -right-6 w-36 h-36 bg-[#ffe4e6]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-4 left-8 w-24 h-24 bg-[#111111]/15 rounded-full blur-2xl pointer-events-none" />
 
         <div className="relative">
           <div className="flex items-center gap-1.5 mb-1">
             <Flame className="w-3.5 h-3.5 text-[#fde68a]" />
-            <p className="text-[#bfcfef] text-xs font-semibold tracking-widest uppercase">Ready to log?</p>
+            <p className="text-[#ffb3bb] text-xs font-semibold tracking-widest uppercase">Ready to log?</p>
           </div>
           <h3 className="font-condensed text-2xl font-bold mb-4 tracking-wide uppercase">
             Log Today&apos;s Workout
@@ -76,20 +76,20 @@ export default async function HomePage() {
 
       {/* My Group card */}
       {profile?.group_id && (
-        <div className="bg-white rounded-2xl border border-[#e2eaf5] p-4 shadow-sm">
+        <div className="bg-white rounded-2xl border border-[#e8e8e8] p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-[#eef3ff] flex items-center justify-center">
-                <Users className="w-4.5 h-4.5 text-[#003087]" />
+              <div className="w-9 h-9 rounded-xl bg-[#fff0f1] flex items-center justify-center">
+                <Users className="w-4.5 h-4.5 text-[#C8102E]" />
               </div>
               <div>
-                <p className="text-[10px] text-[#8aa0bb] font-semibold tracking-widest uppercase">My Group</p>
-                <p className="text-sm font-bold text-[#0f1f3d]">{profile.groups?.name ?? '—'}</p>
+                <p className="text-[10px] text-[#888888] font-semibold tracking-widest uppercase">My Group</p>
+                <p className="text-sm font-bold text-[#111111]">{profile.groups?.name ?? '—'}</p>
               </div>
             </div>
             <Link
               href={`/groups/${profile.group_id}`}
-              className="flex items-center gap-0.5 text-xs text-[#003087] font-semibold hover:text-[#1a4fa0] transition-colors cursor-pointer"
+              className="flex items-center gap-0.5 text-xs text-[#C8102E] font-semibold hover:text-[#a50d25] transition-colors cursor-pointer"
             >
               View <ChevronRight className="w-3 h-3" />
             </Link>
@@ -101,12 +101,12 @@ export default async function HomePage() {
       {season && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-condensed text-lg font-bold text-[#0f1f3d] tracking-wide uppercase">
+            <h3 className="font-condensed text-lg font-bold text-[#111111] tracking-wide uppercase">
               {monthName} Standings
             </h3>
             <Link
               href="/standings"
-              className="flex items-center gap-0.5 text-xs text-[#003087] font-semibold hover:text-[#1a4fa0] transition-colors cursor-pointer"
+              className="flex items-center gap-0.5 text-xs text-[#C8102E] font-semibold hover:text-[#a50d25] transition-colors cursor-pointer"
             >
               See all <ChevronRight className="w-3 h-3" />
             </Link>

@@ -29,7 +29,7 @@ export default function AdminClient({ seasons, activeSeason, groups, profiles, w
             key={t}
             onClick={() => setTab(t)}
             className={`flex-1 text-xs font-semibold py-2 rounded-lg transition-colors capitalize whitespace-nowrap px-2 ${
-              tab === t ? 'bg-white text-[#003087] shadow-sm' : 'text-gray-500'
+              tab === t ? 'bg-white text-[#C8102E] shadow-sm' : 'text-gray-500'
             }`}
           >
             {t}
@@ -109,9 +109,9 @@ function SeasonTab({ seasons, activeSeason, groups, profiles }: { seasons: Seaso
   return (
     <div className="space-y-4">
       {activeSeason ? (
-        <div className="bg-white rounded-2xl border border-[#003087]/30 p-4">
+        <div className="bg-white rounded-2xl border border-[#C8102E]/30 p-4">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="font-bold text-[#003087]">Active Season</h3>
+            <h3 className="font-bold text-[#C8102E]">Active Season</h3>
             <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">Live</span>
           </div>
           <p className="text-sm text-gray-600">{activeSeason.start_date} → {activeSeason.end_date}</p>
@@ -141,14 +141,14 @@ function SeasonTab({ seasons, activeSeason, groups, profiles }: { seasons: Seaso
           <h3 className="font-semibold text-gray-900">New Season</h3>
           <div>
             <label className="text-xs text-gray-500 block mb-1">Start date</label>
-            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]" />
+            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]" />
           </div>
           <div>
             <label className="text-xs text-gray-500 block mb-1">End date</label>
-            <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]" />
+            <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]" />
           </div>
           <div className="flex gap-2">
-            <button onClick={createSeason} disabled={loading} className="flex-1 bg-[#003087] text-white rounded-xl py-2 text-sm font-semibold disabled:opacity-60">
+            <button onClick={createSeason} disabled={loading} className="flex-1 bg-[#C8102E] text-white rounded-xl py-2 text-sm font-semibold disabled:opacity-60">
               {loading ? 'Creating…' : 'Create Season'}
             </button>
             <button onClick={() => setCreating(false)} className="flex-1 border border-gray-200 rounded-xl py-2 text-sm text-gray-600">
@@ -159,7 +159,7 @@ function SeasonTab({ seasons, activeSeason, groups, profiles }: { seasons: Seaso
       ) : (
         <button
           onClick={() => setCreating(true)}
-          className="w-full border-2 border-dashed border-gray-200 rounded-2xl py-4 text-sm text-gray-400 hover:border-[#003087] hover:text-[#003087] transition-colors flex items-center justify-center gap-2"
+          className="w-full border-2 border-dashed border-gray-200 rounded-2xl py-4 text-sm text-gray-400 hover:border-[#C8102E] hover:text-[#C8102E] transition-colors flex items-center justify-center gap-2"
         >
           <Plus className="w-4 h-4" /> New Season
         </button>
@@ -253,7 +253,7 @@ function GroupsTab({ groups, profiles, activeSeason }: { groups: Group[]; profil
             {eligibleToShare.length > 0 && (
               <div className="mt-3 pt-3 border-t border-gray-100">
                 <select
-                  className="text-xs border border-gray-200 rounded-lg px-2 py-1.5 w-full focus:outline-none focus:ring-1 focus:ring-[#003087]"
+                  className="text-xs border border-gray-200 rounded-lg px-2 py-1.5 w-full focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                   defaultValue=""
                   onChange={e => { if (e.target.value) assignSecondaryGroup(e.target.value, g.id) }}
                 >
@@ -273,10 +273,10 @@ function GroupsTab({ groups, profiles, activeSeason }: { groups: Group[]; profil
             value={newGroupName}
             onChange={e => setNewGroupName(e.target.value)}
             placeholder="Group name (e.g. Group 1)"
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
           />
           <div className="flex gap-2">
-            <button onClick={createGroup} disabled={loading || !newGroupName.trim()} className="flex-1 bg-[#003087] text-white rounded-xl py-2 text-sm font-semibold disabled:opacity-60">
+            <button onClick={createGroup} disabled={loading || !newGroupName.trim()} className="flex-1 bg-[#C8102E] text-white rounded-xl py-2 text-sm font-semibold disabled:opacity-60">
               {loading ? 'Creating…' : 'Create'}
             </button>
             <button onClick={() => setCreating(false)} className="flex-1 border border-gray-200 rounded-xl py-2 text-sm">Cancel</button>
@@ -285,7 +285,7 @@ function GroupsTab({ groups, profiles, activeSeason }: { groups: Group[]; profil
       ) : (
         <button
           onClick={() => setCreating(true)}
-          className="w-full border-2 border-dashed border-gray-200 rounded-2xl py-4 text-sm text-gray-400 hover:border-[#003087] hover:text-[#003087] transition-colors flex items-center justify-center gap-2"
+          className="w-full border-2 border-dashed border-gray-200 rounded-2xl py-4 text-sm text-gray-400 hover:border-[#C8102E] hover:text-[#C8102E] transition-colors flex items-center justify-center gap-2"
         >
           <Plus className="w-4 h-4" /> New Group
         </button>
@@ -300,7 +300,7 @@ function GroupsTab({ groups, profiles, activeSeason }: { groups: Group[]; profil
               <div key={u.id} className="flex items-center justify-between text-sm">
                 <span className="text-gray-700">{u.name}</span>
                 <select
-                  className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#003087]"
+                  className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                   defaultValue=""
                   onChange={e => { if (e.target.value) assignPrimaryGroup(u.id, e.target.value) }}
                 >
@@ -359,7 +359,7 @@ function WorkoutsTab({ workoutTypes }: { workoutTypes: WorkoutType[] }) {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="Workout type name"
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
           />
           <div className="flex items-center gap-2">
             <label className="text-sm text-gray-600">Points:</label>
@@ -368,11 +368,11 @@ function WorkoutsTab({ workoutTypes }: { workoutTypes: WorkoutType[] }) {
               value={points}
               min={1}
               onChange={e => setPoints(parseInt(e.target.value))}
-              className="w-20 border border-gray-200 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+              className="w-20 border border-gray-200 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
             />
           </div>
           <div className="flex gap-2">
-            <button onClick={createType} disabled={loading || !name.trim()} className="flex-1 bg-[#003087] text-white rounded-xl py-2 text-sm font-semibold disabled:opacity-60">
+            <button onClick={createType} disabled={loading || !name.trim()} className="flex-1 bg-[#C8102E] text-white rounded-xl py-2 text-sm font-semibold disabled:opacity-60">
               {loading ? 'Adding…' : 'Add'}
             </button>
             <button onClick={() => setCreating(false)} className="flex-1 border border-gray-200 rounded-xl py-2 text-sm">Cancel</button>
@@ -381,7 +381,7 @@ function WorkoutsTab({ workoutTypes }: { workoutTypes: WorkoutType[] }) {
       ) : (
         <button
           onClick={() => setCreating(true)}
-          className="w-full border-2 border-dashed border-gray-200 rounded-2xl py-4 text-sm text-gray-400 hover:border-[#003087] hover:text-[#003087] transition-colors flex items-center justify-center gap-2"
+          className="w-full border-2 border-dashed border-gray-200 rounded-2xl py-4 text-sm text-gray-400 hover:border-[#C8102E] hover:text-[#C8102E] transition-colors flex items-center justify-center gap-2"
         >
           <Plus className="w-4 h-4" /> Add Workout Type
         </button>
@@ -409,13 +409,13 @@ function WorkoutTypeRow({ type, onToggle, onUpdatePoints }: {
               value={pts}
               min={1}
               onChange={e => setPts(parseInt(e.target.value))}
-              className="w-16 text-xs border border-gray-200 rounded px-1.5 py-1 focus:outline-none focus:ring-1 focus:ring-[#003087]"
+              className="w-16 text-xs border border-gray-200 rounded px-1.5 py-1 focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             />
-            <button onClick={() => { onUpdatePoints(type.id, pts); setEditingPts(false) }} className="text-xs text-[#003087] font-semibold">Save</button>
+            <button onClick={() => { onUpdatePoints(type.id, pts); setEditingPts(false) }} className="text-xs text-[#C8102E] font-semibold">Save</button>
             <button onClick={() => setEditingPts(false)} className="text-xs text-gray-400">Cancel</button>
           </div>
         ) : (
-          <button onClick={() => setEditingPts(true)} className="text-xs text-gray-400 hover:text-[#003087] mt-0.5">
+          <button onClick={() => setEditingPts(true)} className="text-xs text-gray-400 hover:text-[#C8102E] mt-0.5">
             {type.point_value} pts — edit
           </button>
         )}
@@ -462,12 +462,12 @@ function InvitesTab({ invites, adminId }: { invites: Invite[]; adminId: string }
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="Email (optional — locks link to email)"
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#003087]"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
         />
         <button
           onClick={createInvite}
           disabled={loading}
-          className="w-full bg-[#003087] text-white rounded-xl py-2.5 text-sm font-semibold disabled:opacity-60"
+          className="w-full bg-[#C8102E] text-white rounded-xl py-2.5 text-sm font-semibold disabled:opacity-60"
         >
           {loading ? 'Creating…' : 'Generate Invite Link'}
         </button>
@@ -489,7 +489,7 @@ function InvitesTab({ invites, adminId }: { invites: Invite[]; adminId: string }
               {!used && !expired && (
                 <button
                   onClick={() => copyLink(inv.token, inv.id)}
-                  className="flex items-center gap-1 text-xs text-[#003087] font-semibold px-2 py-1 rounded-lg bg-blue-50"
+                  className="flex items-center gap-1 text-xs text-[#C8102E] font-semibold px-2 py-1 rounded-lg bg-blue-50"
                 >
                   {copiedId === inv.id ? <><Check className="w-3 h-3" />Copied!</> : <><Copy className="w-3 h-3" />Copy</>}
                 </button>
