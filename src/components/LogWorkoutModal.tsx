@@ -94,7 +94,7 @@ export default function LogWorkoutModal({ seasonId, groupId, defaultWorkoutTypeI
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40" onClick={onClose}>
       <div
-        className="w-full max-w-lg bg-white rounded-t-3xl p-6 pb-10 shadow-xl"
+        className="w-full max-w-lg bg-white rounded-t-3xl p-6 pb-24 shadow-xl overflow-y-auto max-h-[92vh]"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-5">
