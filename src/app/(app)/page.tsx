@@ -10,7 +10,7 @@ export default async function HomePage() {
   const { data: { user } } = await supabase.auth.getUser()
 
   const [{ data: profileRaw }, { data: seasonRaw }] = await Promise.all([
-    supabase.from('profiles').select('*, groups(name)').eq('id', user!.id).single(),
+    supabase.from('profiles').select('*, groups!group_id(name)').eq('id', user!.id).single(),
     supabase.from('seasons').select('*').eq('is_active', true).single(),
   ])
 
