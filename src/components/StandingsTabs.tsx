@@ -29,7 +29,8 @@ export default function StandingsTabs({ groups, profiles, entries, monthlyResult
   const groupTotals: Record<string, number> = {}
   for (const g of groups) groupTotals[g.id] = 0
   for (const e of entries) {
-    for (const gId of (userGroupIds[e.user_id] ?? [])) {
+    const gIds = userGroupIds[e.user_id]?.length ? userGroupIds[e.user_id] : (e.group_id ? [e.group_id] : [])
+    for (const gId of gIds) {
       if (groupTotals[gId] !== undefined) groupTotals[gId] += e.points
     }
   }
