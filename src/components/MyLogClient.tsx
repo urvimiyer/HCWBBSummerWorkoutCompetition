@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { Pencil, Trash2, X, Check } from 'lucide-react'
 import type { WorkoutType } from '@/types/database'
 
@@ -132,14 +131,16 @@ function EntryRow({ entry, workoutTypes, currentUserId, onMutate }: {
 
   async function saveEdit() {
     setSaving(true)
-    const supabase = createClient()
     const selectedType = workoutTypes.find(t => t.id === workoutTypeId)
-    await supabase.from('entries').update({
-      note: note.trim() || null,
-      workout_type_id: workoutTypeId,
-      points: selectedType?.point_value ?? entry.points,
-      edited_at: new Date().toISOString(),
-    }).eq('id', entry.id)
+    await fetch(`/api/entries/${entry.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        note: note.trim() || null,
+        workout_type_id: workoutTypeId,
+        points: selectedType?.point_value ?? entry.points,
+      }),
+    })
     setSaving(false)
     setEditing(false)
     onMutate()
@@ -147,8 +148,7 @@ function EntryRow({ entry, workoutTypes, currentUserId, onMutate }: {
 
   async function deleteEntry() {
     if (!confirm('Delete this workout entry?')) return
-    const supabase = createClient()
-    await supabase.from('entries').delete().eq('id', entry.id)
+    await fetch(`/api/entries/${entry.id}`, { method: 'DELETE' })
     onMutate()
   }
 

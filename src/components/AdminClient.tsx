@@ -199,15 +199,21 @@ function GroupsTab({ groups, profiles, activeSeason }: { groups: Group[]; profil
   }
 
   async function assignPrimaryGroup(userId: string, groupId: string | null) {
-    const supabase = createClient()
-    await supabase.from('profiles').update({ group_id: groupId }).eq('id', userId)
+    await fetch('/api/admin/assign-group', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, groupId, field: 'group_id' }),
+    })
     setAssigningGroup(null)
     router.refresh()
   }
 
   async function assignSecondaryGroup(userId: string, groupId: string | null) {
-    const supabase = createClient()
-    await supabase.from('profiles').update({ group_id_2: groupId }).eq('id', userId)
+    await fetch('/api/admin/assign-group', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, groupId, field: 'group_id_2' }),
+    })
     setAssigningGroup(null)
     router.refresh()
   }

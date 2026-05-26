@@ -28,12 +28,12 @@ export default function BottomNav({ isAdmin }: { isAdmin: boolean }) {
               <Link
                 key={href}
                 href={href}
-                className={`flex-1 flex flex-col items-center gap-1 py-3 text-[10px] font-semibold tracking-wider uppercase transition-colors cursor-pointer ${
+                className={`flex-1 flex flex-col items-center gap-1.5 py-4 text-[11px] font-semibold tracking-wider uppercase transition-colors cursor-pointer ${
                   active ? 'text-[#C8102E]' : 'text-[#888888] hover:text-[#555555]'
                 }`}
               >
                 <Icon
-                  className={`w-5 h-5 transition-all ${active ? 'stroke-[2]' : 'stroke-[1.5]'}`}
+                  className={`w-6 h-6 transition-all ${active ? 'stroke-[2]' : 'stroke-[1.5]'}`}
                 />
                 <span>{label}</span>
                 {active && (
