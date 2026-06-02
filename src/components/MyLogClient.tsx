@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Pencil, Trash2, X, Check } from 'lucide-react'
 import type { WorkoutType } from '@/types/database'
+import { deleteWorkoutEntry } from '@/app/(app)/my-log/actions'
 
 interface EntryWithType {
   id: string
@@ -148,8 +149,11 @@ function EntryRow({ entry, workoutTypes, currentUserId, onMutate }: {
 
   async function deleteEntry() {
     if (!confirm('Delete this workout entry?')) return
-    await fetch(`/api/entries/${entry.id}`, { method: 'DELETE' })
-    onMutate()
+    try {
+      await deleteWorkoutEntry(entry.id)
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Failed to delete entry')
+    }
   }
 
   const dateStr = new Date(entry.date + 'T12:00:00').toLocaleDateString('default', { weekday: 'short', month: 'short', day: 'numeric' })
